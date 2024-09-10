@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile Page</title>
-    <style>
-      .content {
-        display: flex;
-      }
-      .content img {
-        margin-right: 20px;
-      }
-    </style>
   </head>
   <body>
     <h1>Christopher B</h1>
