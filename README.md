@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Profile Page</title>
-  </head>
   <body>
     <h1>Christopher B</h1>
     <h2>Computer Engineering</h2>
