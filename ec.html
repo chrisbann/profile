@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Joe's Hotdog Stand</title>
+    <title>Joe's Hotdog Stand - Extra Credit</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -23,24 +23,35 @@
     <div id="order-summary" class="summary"></div>
 
     <script>
-      // Constants to store item prices
-      const priceHotdog = 4.8;
-      const priceFries = 3.95;
-      const priceSoda = 1.99;
+      // Associative array for item names and prices
+      const items = {
+        Hotdog: 4.8,
+        Fries: 3.95,
+        Soda: 1.99,
+      };
 
-      // Prompt the user to input the number of hotdogs, fries, and sodas
-      let numDogs = parseInt(prompt("How many hotdogs would you like?"), 10);
-      let numFries = parseInt(prompt("How many fries would you like?"), 10);
-      let numSoda = parseInt(prompt("How many sodas would you like?"), 10);
+      // Associative array for item names and quantities
+      const quantities = {};
+
+      // Loop to get quantities from the user for each item
+      for (let item in items) {
+        let quantity = parseInt(
+          prompt(`How many ${item}(s) would you like?`),
+          10
+        );
+        quantities[item] = isNaN(quantity) ? 0 : quantity; // If NaN, set quantity to 0
+      }
 
       // Function to round a number to 2 decimal places (without using toFixed or format)
       function showMoney(value) {
         return Math.round(value * 100) / 100;
       }
 
-      // Calculate the subtotal before discount
-      let subtotal =
-        numDogs * priceHotdog + numFries * priceFries + numSoda * priceSoda;
+      // Loop to calculate the subtotal
+      let subtotal = 0;
+      for (let item in items) {
+        subtotal += quantities[item] * items[item];
+      }
 
       // Apply Joe's special offer (10% discount if subtotal is $25 or more)
       let discount = 0;
@@ -60,9 +71,17 @@
       // Display the order summary
       let orderSummary = `
         <h2>Order Summary</h2>
-        <p>Hotdogs: ${numDogs} ($${showMoney(numDogs * priceHotdog)})</p>
-        <p>Fries: ${numFries} ($${showMoney(numFries * priceFries)})</p>
-        <p>Sodas: ${numSoda} ($${showMoney(numSoda * priceSoda)})</p>
+    `;
+
+      // Loop to display quantities and item costs
+      for (let item in items) {
+        orderSummary += `<p>${item}(s): ${quantities[item]} ($${showMoney(
+          quantities[item] * items[item]
+        )})</p>`;
+      }
+
+      // Add the rest of the summary details
+      orderSummary += `
         <p>Subtotal before discount: $${showMoney(subtotal)}</p>
         <p>Discount: -$${showMoney(discount)}</p>
         <p>Subtotal after discount: $${showMoney(subtotalAfterDiscount)}</p>
