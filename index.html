@@ -23,26 +23,21 @@
     <div id="order-summary" class="summary"></div>
 
     <script>
-      // Constants to store item prices
       const priceHotdog = 4.8;
       const priceFries = 3.95;
       const priceSoda = 1.99;
 
-      // Prompt the user to input the number of hotdogs, fries, and sodas
       let numDogs = parseInt(prompt("How many hotdogs would you like?"), 10);
       let numFries = parseInt(prompt("How many fries would you like?"), 10);
       let numSoda = parseInt(prompt("How many sodas would you like?"), 10);
 
-      // Function to round a number to 2 decimal places (without using toFixed or format)
       function showMoney(value) {
         return Math.round(value * 100) / 100;
       }
 
-      // Calculate the subtotal before discount
       let subtotal =
         numDogs * priceHotdog + numFries * priceFries + numSoda * priceSoda;
 
-      // Apply Joe's special offer (10% discount if subtotal is $25 or more)
       let discount = 0;
       if (subtotal >= 25) {
         discount = 0.1 * subtotal;
@@ -50,14 +45,10 @@
 
       let subtotalAfterDiscount = subtotal - discount;
 
-      // Add 6.25% Massachusetts meals tax to the subtotal after discount
       const taxRate = 0.0625;
       let taxAmount = subtotalAfterDiscount * taxRate;
-
-      // Calculate the final total
       let finalTotal = subtotalAfterDiscount + taxAmount;
 
-      // Display the order summary
       let orderSummary = `
         <h2>Order Summary</h2>
         <p>Hotdogs: ${numDogs} ($${showMoney(numDogs * priceHotdog)})</p>

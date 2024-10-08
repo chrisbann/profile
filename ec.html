@@ -23,37 +23,31 @@
     <div id="order-summary" class="summary"></div>
 
     <script>
-      // Associative array for item names and prices
       const items = {
         Hotdog: 4.8,
         Fries: 3.95,
         Soda: 1.99,
       };
 
-      // Associative array for item names and quantities
       const quantities = {};
 
-      // Loop to get quantities from the user for each item
       for (let item in items) {
         let quantity = parseInt(
           prompt(`How many ${item}(s) would you like?`),
           10
         );
-        quantities[item] = isNaN(quantity) ? 0 : quantity; // If NaN, set quantity to 0
+        quantities[item] = isNaN(quantity) ? 0 : quantity;
       }
 
-      // Function to round a number to 2 decimal places (without using toFixed or format)
       function showMoney(value) {
         return Math.round(value * 100) / 100;
       }
 
-      // Loop to calculate the subtotal
       let subtotal = 0;
       for (let item in items) {
         subtotal += quantities[item] * items[item];
       }
 
-      // Apply Joe's special offer (10% discount if subtotal is $25 or more)
       let discount = 0;
       if (subtotal >= 25) {
         discount = 0.1 * subtotal;
@@ -61,26 +55,20 @@
 
       let subtotalAfterDiscount = subtotal - discount;
 
-      // Add 6.25% Massachusetts meals tax to the subtotal after discount
       const taxRate = 0.0625;
       let taxAmount = subtotalAfterDiscount * taxRate;
-
-      // Calculate the final total
       let finalTotal = subtotalAfterDiscount + taxAmount;
 
-      // Display the order summary
       let orderSummary = `
         <h2>Order Summary</h2>
     `;
 
-      // Loop to display quantities and item costs
       for (let item in items) {
         orderSummary += `<p>${item}(s): ${quantities[item]} ($${showMoney(
           quantities[item] * items[item]
         )})</p>`;
       }
 
-      // Add the rest of the summary details
       orderSummary += `
         <p>Subtotal before discount: $${showMoney(subtotal)}</p>
         <p>Discount: -$${showMoney(discount)}</p>
